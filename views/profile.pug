@@ -1,0 +1,15 @@
+extends layout
+block content
+  h3 #{user.username}
+  if user.google.displayName
+    p Login provided: Google
+  if user.city
+    p City: #{user.city}
+  else
+    p Please set your location
+  form(method='post' action='updateCity')
+    label(for='city') Change your City:
+    .input-group
+      input#city.form-control(name='city' placeholder=`${user.city || 'City Name..'}` type='text' required)
+      span.input-group-btn
+        button.btn.btn-default(type='submit') Update

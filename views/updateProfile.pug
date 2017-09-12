@@ -1,0 +1,7 @@
+extends layout
+block content
+  h1 Welcome, &nbsp;{user.username}
+  .panel
+    p It looks like you were browsing cafes in <strong>#{city}</strong>, but your profile city is <Strong>#{user.city}</strong>.
+  a.btn.btn-default(href=`/search?city=${user.city}`) Don't change profile. Browse cafes in #{user.city}
+  a.btn.btn-default(href=`/updateCity?city=${city}`) Change profile and browse cafes in #{city}

@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  .well
+    form(method='post' action='/updateCity')
+      if (user || {}).city
+        label(for='city') Change your City:
+      else
+        label(for='city') Enter your Location:
+      .input-group
+        input#city.form-control(name='city' placeholder=`${city || 'City to Search..'}` type='text' required)
+        span.input-group-btn
+          button.btn.btn-default(type='submit') Update City
+  if (cafes && city)
+    .panel.panel-default
+      .panel-heading: h2.text-center Cafes near #{city}
+      .list-group
+        each cafe in (cafes || [])
+          .list-group-item
+            span.badge= cafe.rsvpUsers.userIds.length
+            h4.list-group-item-heading= cafe.name
+            if cafe.rsvpUsers.usernames.length
+              span.pull-right= `(${cafe.rsvpUsers.usernames.join(', ')})`
+            if (user && cafe.rsvpUsers.userIds.includes(user.id))
+              a.btn.btn-danger(href=`/rsvp/remove?yelpId=${cafe.id}`) Remove RSVP
+            else
+              a.btn.btn-default(href=`/rsvp/create?yelpId=${cafe.id}`) RSVP
+        else
+          .list-group-item Yelp couldn't find any cafes nearby

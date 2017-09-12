@@ -1,0 +1,13 @@
+block navbar
+  nav.navbar.navbar-default
+    .container
+      .navbar-header
+        a.navbar-brand(href='/') <b>Cafe Search</b>
+      ul.nav.navbar-nav.navbar-right
+        if user
+          li: p.navbar-text
+            | Welcome, &nbsp;
+            a(href='/profile') #{user.username}
+          li: a(href='/logout') Logout
+        else
+          li: a(href='/auth/google') Login with Google
